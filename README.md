@@ -1,2 +1,2 @@
 # raspios-for-netboot
-It downloads Raspberry PI OS image and prepares it for netboot
+Script downloads Raspberry PI OS image and sets it up for netboot
