@@ -5,7 +5,7 @@
 # 3. copy files from partitions to ./raspios_rootfs/ and ./raspios_rootfs/boot/
 # 4. edit ./raspios_rootfs/etc/fstab, create template ./raspios_rootfs/boot/cmdline.txt.j2, enable ssh
 
-image=2021-10-30-raspios-bullseye-armhf.zip
+image=2021-10-30-raspios-bullseye-armhf
 
 sudo apt install unzip kpartx
 
