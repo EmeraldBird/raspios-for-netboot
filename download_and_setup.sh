@@ -27,9 +27,9 @@ then
 
 else
         read -r boot_start boot_sectors root_start root_sectors \
-         <<< `fdisk -l *.img | grep -A 2 Device | grep -v Device | tr -s ' ' | cut -f 2,4 -d ' ' | tr '\n' ' '`
+         <<< `sudo fdisk -l ${image}.img | grep -A 2 Device | grep -v Device | tr -s ' ' | cut -f 2,4 -d ' ' | tr '\n' ' '`
 
-    bytes=`fdisk -l *.img | grep Units | grep -Eo '[0-9]* bytes' |grep -Eo '[0-9]*'`
+    bytes=`sudo fdisk -l ${image}.img | grep Units | grep -Eo '[0-9]* bytes' |grep -Eo '[0-9]*'`
 
     let boot_offset=boot_start*bytes
     let boot_sizelimit=boot_sectors*bytes
@@ -61,4 +61,4 @@ sudo touch ./raspios_rootfs/boot/ssh
 sudo sed -i 's/\([^#]*.*UUID\)/#\1/g' ./raspios_rootfs/etc/fstab
 
 # Jinja2 template for further configuration on the server
-echo "console=serial0,115200 console=tty root=/dev/nfs nfsroot={{ NFS_IP }}:{{ NFS_PATH }},vers=3 rw ip=dhcp rootwait elevator=deadline usbhid.mousepoll=1" > ./raspios_rootfs/boot/cmdline.txt.j2
+echo "console=serial0,115200 console=tty root=/dev/nfs nfsroot={{ NFS_IP }}:{{ NFS_PATH }},vers=3 rw ip=dhcp rootwait elevator=deadline usbhid.mousepoll=1" | sudo tee ./raspios_rootfs/boot/cmdline.txt.j2 >> /dev/null
